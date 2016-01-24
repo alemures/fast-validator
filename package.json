@@ -1,0 +1,32 @@
+{
+  "name": "fast-validator",
+  "version": "0.0.1",
+  "description": "A fast and simple data validator.",
+  "author": "Alejandro Santiago Nieto",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "jscs": "^2.0.0",
+    "jsdoc": "^3.4.0",
+    "jshint": "^2.8.0",
+    "mocha": "^2.2.5"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha test/*.js",
+    "jshint": "jshint index.js test/*.js",
+    "jscs": "jscs index.js test/*.js",
+    "jscs:fix": "jscs --fix index.js test/*.js",
+    "check": "npm run test && npm run jshint && npm run jscs && npm outdated"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alemures/fast-validator.git"
+  }
+}
