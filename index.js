@@ -1,3 +1,3 @@
 'use strict';
 
-// Work in progress
+module.exports = require('./lib/validator');

@@ -1,6 +1,6 @@
 {
   "name": "fast-validator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A fast and simple data validator.",
   "author": "Alejandro Santiago Nieto",
   "license": "MIT",
@@ -15,15 +15,17 @@
   },
   "main": "index.js",
   "files": [
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "scripts": {
     "start": "node index.js",
     "test": "mocha test/*.js",
-    "jshint": "jshint index.js test/*.js",
-    "jscs": "jscs index.js test/*.js",
-    "jscs:fix": "jscs --fix index.js test/*.js",
-    "check": "npm run test && npm run jshint && npm run jscs && npm outdated"
+    "jshint": "jshint index.js lib/*.js test/*.js examples/*.js",
+    "jscs": "jscs index.js lib/*.js test/*.js examples/*.js",
+    "jscs:fix": "jscs --fix index.js lib/*.js test/*.js examples/*.js",
+    "check": "npm run test && npm run jshint && npm run jscs && npm outdated",
+    "doc": "rm -rf ./doc && jsdoc ./lib/ ./package.json ./README.md -d ./doc"
   },
   "repository": {
     "type": "git",
