@@ -1,5 +1,5 @@
 # fast-validator
-A fast and simple data validator.
+An extremely fast and simple data validator. It's very useful in high performance processes that handle simple data or don't require to be very fussy about the data validation like messages server to server or interprocess communication.
 
 #### Install
 ```

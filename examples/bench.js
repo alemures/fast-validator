@@ -2,7 +2,8 @@
 
 var validate = require('../lib/validator').validate;
 
-var TIMES = 1e+6;
+// 44 ms with 100.000 times, 344 ms with 1.000.000
+var TIMES = 1e+5;
 var start = Date.now();
 for (var i = 0; i < TIMES; i++) {
   run();
