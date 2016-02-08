@@ -8,22 +8,19 @@ npm install fast-validator
 
 #### Usage
 ```
-var validate = require('fast-validator').validate;
+var fast = require('fast-validator');
 
-var data = ['fast', 'validator'];
-var rules = { type: 'string', min: 2, max: 50 };
+var rules = fast.string({ min: 2, max: 50 });
 
-var result = validate(data, rules);
-console.log('Result:', result);
+var data = 'fast-validator';
+var result = rules.validate(data);
+
+if (result === -1) {
+  console.log('Valid data!');
+} else {
+  console.log('Invalid data found:', data);
+}
 ```
-
-#### Type values
-* string
-* number
-* boolean
-* object
-* array
-* num_boolean
 
 #### Examples
 Check examples folder!

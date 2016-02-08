@@ -57,4 +57,13 @@ function run() {
   // numBooleanRules.validateList(numBoleans);
   // objectRules.validateList(objects);
   // stringRules.validateList(strings);
+
+  // arrayRules.validate(undefined, undefined, undefined);
+  // booleanRules.validate(undefined, undefined, undefined);
+  // bufferRules.validate(undefined, undefined, undefined);
+  // dateRules.validate(undefined, undefined, undefined);
+  // numberRules.validate(undefined, undefined, undefined);
+  // numBooleanRules.validate(undefined, undefined, undefined);
+  // objectRules.validate(undefined, undefined, undefined);
+  // stringRules.validate(undefined, undefined, undefined);
 }

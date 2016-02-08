@@ -1,14 +1,23 @@
 'use strict';
 
-var validate = require('../lib/validator').validate;
+var fast = require('../index');
 
-var data = ['fast', 'validator'];
-var rules = { type: 'string', min: 2, max: 50 };
+var rules = fast.string({ min: 2, max: 50 });
 
-var result = validate(data, rules);
+var data = 'fast-validator';
+var result = rules.validate(data);
 
 if (result === -1) {
   console.log('Valid data!');
 } else {
-  console.log('Invalid data found:', data[result]);
+  console.log('Invalid data found:', data);
+}
+
+var dataList = ['fast', 'validator'];
+var resultList = rules.validateList(dataList);
+
+if (resultList === -1) {
+  console.log('Valid dataList!');
+} else {
+  console.log('Invalid dataList found:', dataList[resultList]);
 }
