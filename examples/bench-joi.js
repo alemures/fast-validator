@@ -9,7 +9,7 @@ var schemaNumBoolean = joi.number().valid(1, 2);
 var schemaArray = joi.array().min(1).max(10).allow(null);
 var schemaObject = joi.object().min(1).max(10).allow(null);
 
-// 13540 ms with 100.000 times, not finish with 1.000.000
+// 7,864 ms with 100,000 times, not finish with 1,000,000
 var TIMES = 1e+5;
 var start = Date.now();
 for (var i = 0; i < TIMES; i++) {
@@ -35,8 +35,8 @@ function run() {
   schemaNumBoolean.validate(1);
   schemaNumBoolean.validate(1);
 
-  schemaArray.validate([1,2,3]);
-  schemaArray.validate(['a','b','c']);
+  schemaArray.validate([1, 2, 3]);
+  schemaArray.validate(['a', 'b', 'c']);
   schemaArray.validate([]);
 
   schemaObject.validate({ a:1 });

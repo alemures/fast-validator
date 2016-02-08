@@ -29,7 +29,7 @@ var strings = ['alejandro', 'santiago', 'nieto'];
 // console.log(objectRules.validate(objects[0], objects[1], objects[2]));
 // console.log(stringRules.validate(strings[0], strings[1], strings[2]));
 
-// 35 ms with 100.000 times, 280 ms with 1.000.000
+// 35 ms with 100,000 times, 235 ms with 1,000,000
 var TIMES = 1e+6;
 var start = Date.now();
 
