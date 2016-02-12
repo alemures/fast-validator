@@ -2,14 +2,14 @@
 
 var fast = require('../index');
 
-var arrayRules = fast.array({ min: 1, max: 10, undef: true, null: true });
-var booleanRules = fast.boolean({ undef: true, null: true });
-var bufferRules = fast.buffer({ min: 1, max: 10, undef: true, null: true });
-var dateRules = fast.date({ min: new Date('2016-02-01'), max: new Date('2016-02-28'), undef: true, null: true });
-var numberRules = fast.number({ min: 1, max: 10, undef: true, null: true });
-var numBooleanRules = fast.numBoolean({ undef: true, null: true });
-var objectRules = fast.object({ min: 1, max: 10, undef: true, null: true });
-var stringRules = fast.string({ min: 1, max: 10, undef: true, null: true });
+var arrayRules = fast.array().min(1).max(10).undef();
+var booleanRules = fast.boolean().undef();
+var bufferRules = fast.buffer().min(1).max(10).undef();
+var dateRules = fast.date().min(new Date('2016-02-01')).max(new Date('2016-02-28')).undef();
+var numberRules = fast.number().min(1).max(10).undef();
+var numBooleanRules = fast.numBoolean().undef();
+var objectRules = fast.object().min(1).max(10).undef();
+var stringRules = fast.string().min(1).max(10).undef();
 
 var arrays = [[1, 2, 3], ['a', 'b', 'c'], []];
 var booleans = [true, false, true];

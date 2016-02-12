@@ -5,7 +5,7 @@
   "author": "Alejandro Santiago Nieto",
   "license": "MIT",
   "dependencies": {
-    "utjs": "^1.4.1"
+    "utjs": "^1.4.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",

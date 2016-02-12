@@ -10,7 +10,7 @@ npm install fast-validator
 ```
 var fast = require('fast-validator');
 
-var rules = fast.string({ min: 2, max: 50 });
+var rules = fast.string().min(2).max(50);
 
 var data = 'fast-validator';
 var result = rules.validate(data);
