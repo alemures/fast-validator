@@ -2,16 +2,16 @@
 
 var fast = require('../index');
 
-var arrayRules = fast.array().min(1).max(10).undef();
-var booleanRules = fast.boolean().undef();
-var bufferRules = fast.buffer().min(1).max(10).undef();
-var dateRules = fast.date().min(new Date('2016-02-01')).max(new Date('2016-02-28')).undef();
-var numberRules = fast.number().min(1).max(10).undef();
-var numBooleanRules = fast.numBoolean().undef();
-var objectRules = fast.object().min(1).max(10).undef();
-var stringRules = fast.string().min(1).max(10).undef();
+var arrayRules = fast.array().min(1).max(10);
+var booleanRules = fast.boolean();
+var bufferRules = fast.buffer().min(1).max(10);
+var dateRules = fast.date().min(new Date('2016-02-01')).max(new Date('2016-02-28'));
+var numberRules = fast.number().min(1).max(10);
+var numBooleanRules = fast.numBoolean();
+var objectRules = fast.object().min(1).max(10);
+var stringRules = fast.string().min(1).max(10);
 
-var arrays = [[1, 2, 3], ['a', 'b', 'c'], []];
+var arrays = [[1, 2, 3], ['a', 'b', 'c'], [true]];
 var booleans = [true, false, true];
 var buffers = [new Buffer('alejandro'), new Buffer('santiago'), new Buffer('nieto')];
 var dates = [new Date('2016-02-01'), new Date('2016-02-11'), new Date('2016-02-21')];
