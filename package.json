@@ -5,11 +5,11 @@
   "author": "Alejandro Santiago Nieto",
   "license": "MIT",
   "dependencies": {
-    "utjs": "^1.4.1"
+    "utjs": "^1.4.4"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "jscs": "^2.0.0",
+    "jscs": "^2.11.0",
     "jsdoc": "^3.4.0",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5"
