@@ -5,19 +5,17 @@ var fast = require('../index');
 var rules = fast.string().min(2).max(50);
 
 var data = 'fast-validator';
-var result = rules.validate(data);
 
-if (result === -1) {
+if (rules.validate(data)) {
   console.log('Valid data!');
 } else {
-  console.log('Invalid data found:', data);
+  console.log('Invalid data');
 }
 
 var dataList = ['fast', 'validator'];
-var resultList = rules.validateList(dataList);
 
-if (resultList === -1) {
+if (rules.validateList(dataList)) {
   console.log('Valid dataList!');
 } else {
-  console.log('Invalid dataList found:', dataList[resultList]);
+  console.log('Invalid dataList');
 }

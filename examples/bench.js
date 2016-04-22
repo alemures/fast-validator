@@ -15,7 +15,7 @@ var booleans = [true, false, true];
 var buffers = [new Buffer('alejandro'), new Buffer('santiago'), new Buffer('nieto')];
 var dates = [new Date('2016-02-01'), new Date('2016-02-11'), new Date('2016-02-21')];
 var numbers = [1, 2, 3];
-var objects = [{ a:1 }, { b:'2' }, { c:true }];
+var objects = [{ a: 1 }, { b: '2' }, { c: true }];
 var strings = ['alejandro', 'santiago', 'nieto'];
 
 // console.log(arrayRules.validate(arrays[0], arrays[1], arrays[2]));

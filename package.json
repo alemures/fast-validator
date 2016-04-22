@@ -9,9 +9,9 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "jscs": "^2.11.0",
+    "jscs": "^3.0.3",
     "jsdoc": "^3.4.0",
-    "jshint": "^2.8.0",
+    "jshint": "^2.9.2",
     "mocha": "^2.2.5"
   },
   "main": "index.js",

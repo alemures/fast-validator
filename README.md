@@ -11,14 +11,12 @@ npm install fast-validator
 var fast = require('fast-validator');
 
 var rules = fast.string().min(2).max(50);
-
 var data = 'fast-validator';
-var result = rules.validate(data);
 
-if (result === -1) {
+if (rules.validate(data)) {
   console.log('Valid data!');
 } else {
-  console.log('Invalid data found:', data);
+  console.log('Invalid data');
 }
 ```
 
