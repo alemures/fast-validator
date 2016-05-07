@@ -1,5 +1,5 @@
 # fast-validator
-An extremely fast and Joi like data validator. It shares the Joi schema creation syntax and tries to get the maximum performance sacrificing descriptive error logs.
+An extremely fast and Joi like data validator. It shares the Joi schema creation syntax but it's much, much faster.
 
 #### Install
 ```
@@ -22,6 +22,15 @@ if (rules.validate(data)) {
 
 #### Examples
 Check examples folder!
+
+#### Benchmarks
+Validating a simple object with strings and numbers one million times will take 120ms against the 20.000ms that will take Joi.
+
+```
+var fastSchema = fast.object().keys({ a:fast.string().min(2).max(50), b: fast.number().min(2).max(50) });
+var joiSchema = Joi.object().keys({ a:Joi.string().min(2).max(50), b: Joi.number().min(2).max(50) });
+var data = { a: 'asdf', b: 3 };
+```
 
 #### jsdoc
 http://alemures.github.io/fast-validator/
