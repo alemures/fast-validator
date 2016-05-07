@@ -41,7 +41,7 @@ function run() {
   booleanRules.validate(booleans[0], booleans[1], booleans[2]); // 18 ms
   bufferRules.validate(buffers[0], buffers[1], buffers[2]); // 34 ms
   dateRules.validate(dates[0], dates[1], dates[2]); // 42 ms
-  numberRules.validate(numbers[0], numbers[1], numbers[2]); // 22 ms
+  numberRules.validate(numbers[0], numbers[1], numbers[2]); // 42 ms
   objectRules.validate(objects[0], objects[1], objects[2]); // 66 ms
   stringRules.validate(strings[0], strings[1], strings[2]); // 36 ms
 
