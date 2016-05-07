@@ -5,7 +5,7 @@
   "author": "Alejandro Santiago Nieto",
   "license": "MIT",
   "dependencies": {
-    "utjs": "^1.4.4"
+    "utjs": "^1.5.3"
   },
   "devDependencies": {
     "chai": "^3.2.0",
@@ -30,6 +30,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alemures/fast-validator.git"
+    "url": "https://github.com/alemures/fast-validator"
   }
 }
