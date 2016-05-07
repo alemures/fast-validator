@@ -1,7 +1,7 @@
 {
   "name": "fast-validator",
   "version": "1.0.0",
-  "description": "A fast and simple data validator.",
+  "description": "An extremely fast and Joi like data validator.",
   "author": "Alejandro Santiago Nieto",
   "license": "MIT",
   "dependencies": {
