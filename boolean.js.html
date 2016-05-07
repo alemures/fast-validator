@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: boolean.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,47 +17,55 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: boolean.js</h1>
 
     
 
 
 
     
-
-
-    <h3>fast-validator 1.0.0</h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>fast-validator</h1><p>An extremely fast and simple data validator. It's very useful in high performance processes that handle simple data or don't require to be very fussy about the data validation like messages server to server or interprocess communication.</p>
-<h4>Install</h4><pre class="prettyprint source"><code>npm install fast-validator</code></pre><h4>Usage</h4><pre class="prettyprint source"><code>var fast = require('fast-validator');
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
-var rules = fast.string().min(2).max(50);
-var data = 'fast-validator';
+var util = require('util');
 
-if (rules.validate(data)) {
-  console.log('Valid data!');
-} else {
-  console.log('Invalid data');
-}</code></pre><h4>Examples</h4><p>Check examples folder!</p>
-<h4>jsdoc</h4><p>http://alemures.github.io/fast-validator/</p></article>
+var Type = require('./Type');
+
+/**
+ * Generates a schema object that matches a boolean data type.
+ *
+ * @constructor
+ * @extends Type
+ */
+function BooleanType() {
+  BooleanType.super_.call(this);
+}
+
+util.inherits(BooleanType, Type);
+
+BooleanType.prototype._validate = function (value) {
+  var rules = this._rules;
+
+  if (typeof value !== 'boolean') {
+    return !rules.required &amp;&amp; value === undefined;
+  }
+
+  return rules.forbidden ? false : true;
+};
+
+/**
+ * Creates and returns a BooleanType object.
+ * @return {BooleanType} The BooleanType object.
+ * @global
+ * @alias boolean
+ */
+module.exports = function boolean() {
+  return new BooleanType();
+};
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

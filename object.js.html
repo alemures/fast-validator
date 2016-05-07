@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: object.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: object.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+var assert = require('assert');
+var util = require('util');
+
+var ut = require('utjs');
+
+var Type = require('./Type');
+
+/**
+ * Generates a schema object that matches an object data type.
+ *
+ * @constructor
+ * @extends Type
+ */
+function ObjectType() {
+  ObjectType.super_.call(this);
+}
+
+util.inherits(ObjectType, Type);
+
+/**
+ * Specifies the minimum number of keys in the object.
+ * @param  {Number} limit The lowest number of keys allowed.
+ * @return {ObjectType} The class reference so multiple calls can be chained.
+ */
+ObjectType.prototype.min = function (limit) {
+  assert(ut.isInteger(limit) &amp;&amp; limit >= 0, 'limit must be a positive integer');
+
+  this._rules.min = limit;
+  return this;
+};
+
+/**
+ * Specifies the maximum number of keys in the object.
+ * @param  {Number} limit The highest number of keys allowed.
+ * @return {ObjectType} The class reference so multiple calls can be chained.
+ */
+ObjectType.prototype.max = function (limit) {
+  assert(ut.isInteger(limit) &amp;&amp; limit >= 0, 'limit must be a positive integer');
+
+  this._rules.max = limit;
+  return this;
+};
+
+/**
+ * Specifies the exact number of keys in the object.
+ * @param  {Number} limit The number of object keys allowed.
+ * @return {ObjectType} The class reference so multiple calls can be chained.
+ */
+ObjectType.prototype.length = function (limit) {
+  assert(ut.isInteger(limit) &amp;&amp; limit >= 0, 'limit must be a positive integer');
+
+  this._rules.length = limit;
+  return this;
+};
+
+/**
+ * Sets the allowed object keys.
+ * @param  {Object} keys Object where each key is assigned a joi type object.
+ * @return {ObjectType} The class reference so multiple calls can be chained.
+ */
+ObjectType.prototype.keys = function (keys) {
+  assert(ut.isPlainObject(keys), 'keys must be a plain object');
+
+  this._rules.keys = keys;
+  return this;
+};
+
+/**
+ * Requires the object to be an instance of a given constructor
+ * @param  {Function} constructor The constructor function that the object must be an instance of.
+ * @return {ObjectType} The class reference so multiple calls can be chained.
+ */
+ObjectType.prototype.type = function (constructor) {
+  assert(ut.isFunction(constructor), 'type must be a constructor function');
+
+  this._rules.type = constructor;
+  return this;
+};
+
+ObjectType.prototype._validate = function (value) {
+  var rules = this._rules;
+
+  if (typeof value !== 'object' || value === null) {
+    return !rules.required &amp;&amp; value === undefined;
+  }
+
+  var min = rules.min;
+  var max = rules.max;
+  var ruleLength = rules.length;
+  var keys = rules.keys;
+  var type = rules.type;
+
+  var length = -1;
+
+  if (min !== undefined) {
+    length = ut.objectLength(value);
+
+    if (length &lt; min) {
+      return false;
+    }
+  }
+
+  if (max !== undefined) {
+    if (length === -1) {
+      length = ut.objectLength(value);
+    }
+
+    if (length > max) {
+      return false;
+    }
+  }
+
+  if (ruleLength !== undefined) {
+    if (length === -1) {
+      length = ut.objectLength(value);
+    }
+
+    if (length !== ruleLength) {
+      return false;
+    }
+  }
+
+  if (type !== undefined &amp;&amp; value instanceof type === false) {
+    return false;
+  }
+
+  if (keys !== undefined &amp;&amp; !this._validateKeys(value, keys)) {
+    return false;
+  }
+
+  return rules.forbidden ? false : true;
+};
+
+ObjectType.prototype._validateKeys = function (value, keys) {
+  var checked = {};
+  var i;
+
+  for (i in value) {
+    if (keys[i] !== undefined &amp;&amp; !keys[i].validate(value[i])) {
+      return false;
+    }
+
+    checked[i] = 1;
+  }
+
+  for (i in keys) {
+    if (keys[i]._rules.required &amp;&amp; checked[i] === undefined) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * Creates and returns a ObjectType object.
+ * @return {ObjectType} The ObjectType object.
+ * @global
+ * @alias object
+ */
+module.exports = function object() {
+  return new ObjectType();
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayType.html">ArrayType</a></li><li><a href="BooleanType.html">BooleanType</a></li><li><a href="BufferType.html">BufferType</a></li><li><a href="DateType.html">DateType</a></li><li><a href="NumberType.html">NumberType</a></li><li><a href="ObjectType.html">ObjectType</a></li><li><a href="StringType.html">StringType</a></li><li><a href="Type.html">Type</a></li></ul><h3>Global</h3><ul><li><a href="global.html#array">array</a></li><li><a href="global.html#boolean">boolean</a></li><li><a href="global.html#buffer">buffer</a></li><li><a href="global.html#date">date</a></li><li><a href="global.html#number">number</a></li><li><a href="global.html#object">object</a></li><li><a href="global.html#string">string</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat May 07 2016 22:22:24 GMT+0100 (IST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

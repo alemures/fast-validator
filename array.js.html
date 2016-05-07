@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: array.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: array.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+var assert = require('assert');
+var util = require('util');
+
+var ut = require('utjs');
+
+var Type = require('./Type');
+
+/**
+ * Generates a schema object that matches an array data type.
+ * Note that undefined values inside arrays are not allowed
+ * by default but can be by using sparse().
+ *
+ * @constructor
+ * @extends Type
+ */
+function ArrayType() {
+  ArrayType.super_.call(this);
+}
+
+util.inherits(ArrayType, Type);
+
+/**
+ * Specifies the minimum number of items in the array.
+ * @param  {Number} limit The lowest number of array items allowed.
+ * @return {ArrayType} The class reference so multiple calls can be chained.
+ */
+ArrayType.prototype.min = function (limit) {
+  assert(ut.isInteger(limit) &amp;&amp; limit >= 0, 'limit must be a positive integer');
+
+  this._rules.min = limit;
+  return this;
+};
+
+/**
+ * Specifies the maximum number of items in the array.
+ * @param  {Number} limit The highest number of array items allowed.
+ * @return {ArrayType} The class reference so multiple calls can be chained.
+ */
+ArrayType.prototype.max = function (limit) {
+  assert(ut.isInteger(limit) &amp;&amp; limit >= 0, 'limit must be a positive integer');
+
+  this._rules.max = limit;
+  return this;
+};
+
+/**
+ * Specifies the exact number of items in the array.
+ * @param  {Number} limit The number of array items allowed.
+ * @return {ArrayType} The class reference so multiple calls can be chained.
+ */
+ArrayType.prototype.length = function (limit) {
+  assert(ut.isInteger(limit) &amp;&amp; limit >= 0, 'limit must be a positive integer');
+
+  this._rules.length = limit;
+  return this;
+};
+
+/**
+ * Allow this array to be sparse.
+ * @param  {Boolean} [enabled] Can be used with a falsy value to go back
+ *                             to the default behavior.
+ * @return {ArrayType} The class reference so multiple calls can be chained.
+ */
+ArrayType.prototype.sparse = function (enabled) {
+  this._rules.sparse = enabled === undefined ? true : !!enabled;
+  return this;
+};
+
+/**
+ * List the types allowed for the array values.
+ * @param  {...Type|Array.&lt;Type>} type A schema object to validate each array item against.
+ *                                     Type can be an array of values, or multiple values
+ *                                     can be passed as individual arguments.
+ * @return {ArrayType} The class reference so multiple calls can be chained.
+ */
+ArrayType.prototype.items = function (type) {
+  this._rules.items = Array.isArray(type) ? type :
+      ut.argumentsToArray(arguments);
+  return this;
+};
+
+ArrayType.prototype._validate = function (value) {
+  var rules = this._rules;
+
+  if (!Array.isArray(value)) {
+    return !rules.required &amp;&amp; value === undefined;
+  }
+
+  var min = rules.min;
+  var max = rules.max;
+  var length = rules.length;
+  var items = rules.items;
+
+  var valueLength = value.length;
+
+  if (min !== undefined &amp;&amp; valueLength &lt; min ||
+      max !== undefined &amp;&amp; valueLength > max) {
+    return false;
+  }
+
+  if (length !== undefined &amp;&amp; valueLength !== length) {
+    return false;
+  }
+
+  if (items !== undefined &amp;&amp; !this._validateItems(value, items)) {
+    return false;
+  }
+
+  return rules.forbidden ? false : true;
+};
+
+ArrayType.prototype._validateItems = function (value, items) {
+  var checked = new Array(items.length);
+
+  var found;
+  for (var i = 0; i &lt; value.length; i++) {
+    found = false;
+    for (var j = 0; j &lt; items.length &amp;&amp; !found; j++) {
+      if (this._rules.sparse &amp;&amp; value[i] === undefined) {
+        found = true;
+      } else if (value[i] !== undefined &amp;&amp; items[j].validate(value[i])) {
+        found = true;
+        checked[j] = true;
+      }
+    }
+
+    if (!found) {
+      return false;
+    }
+  }
+
+  for (i = 0; i &lt; items.length; i++) {
+    if (items[i]._rules.required &amp;&amp; !checked[i]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * Creates and returns an ArrayType object.
+ * @return {ArrayType} The ArrayType object.
+ * @global
+ * @alias array
+ */
+module.exports = function array() {
+  return new ArrayType();
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArrayType.html">ArrayType</a></li><li><a href="BooleanType.html">BooleanType</a></li><li><a href="BufferType.html">BufferType</a></li><li><a href="DateType.html">DateType</a></li><li><a href="NumberType.html">NumberType</a></li><li><a href="ObjectType.html">ObjectType</a></li><li><a href="StringType.html">StringType</a></li><li><a href="Type.html">Type</a></li></ul><h3>Global</h3><ul><li><a href="global.html#array">array</a></li><li><a href="global.html#boolean">boolean</a></li><li><a href="global.html#buffer">buffer</a></li><li><a href="global.html#date">date</a></li><li><a href="global.html#number">number</a></li><li><a href="global.html#object">object</a></li><li><a href="global.html#string">string</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat May 07 2016 22:22:24 GMT+0100 (IST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
