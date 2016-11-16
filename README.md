@@ -1,5 +1,5 @@
 # fast-validator
-An extremely fast and simple data validator. It's very useful in high performance processes that handle simple data or don't require to be very fussy about the data validation like messages server to server or interprocess communication.
+An extremely fast and Joi like data validator. It shares the Joi schema creation syntax but it's much, much faster.
 
 #### Install
 ```
@@ -8,25 +8,29 @@ npm install fast-validator
 
 #### Usage
 ```
-var validate = require('fast-validator').validate;
+var fast = require('fast-validator');
 
-var data = ['fast', 'validator'];
-var rules = { type: 'string', min: 2, max: 50 };
+var rules = fast.string().min(2).max(50);
+var data = 'fast-validator';
 
-var result = validate(data, rules);
-console.log('Result:', result);
+if (rules.validate(data)) {
+  console.log('Valid data!');
+} else {
+  console.log('Invalid data');
+}
 ```
-
-#### Type values
-* string
-* number
-* boolean
-* object
-* array
-* num_boolean
 
 #### Examples
 Check examples folder!
+
+#### Benchmarks
+Validating a simple object with strings and numbers one million times will take 120ms against the 20.000ms that will take Joi.
+
+```
+var fastSchema = fast.object().keys({ a:fast.string().min(2).max(50), b: fast.number().min(2).max(50) });
+var joiSchema = Joi.object().keys({ a:Joi.string().min(2).max(50), b: Joi.number().min(2).max(50) });
+var data = { a: 'asdf', b: 3 };
+```
 
 #### jsdoc
 http://alemures.github.io/fast-validator/
