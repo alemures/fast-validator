@@ -5,14 +5,14 @@
   "author": "Alejandro Santiago Nieto",
   "license": "MIT",
   "dependencies": {
-    "utjs": "^1.5.3"
+    "utjs": "2.x.x"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "jscs": "^3.0.3",
-    "jsdoc": "^3.4.0",
-    "jshint": "^2.9.2",
-    "mocha": "^2.2.5"
+    "chai": "3.x.x",
+    "jscs": "3.x.x",
+    "jsdoc": "3.x.x",
+    "jshint": "2.x.x",
+    "mocha": "3.x.x"
   },
   "main": "index.js",
   "files": [
@@ -20,7 +20,6 @@
     "lib"
   ],
   "scripts": {
-    "start": "node index.js",
     "test": "mocha test/*.js",
     "jshint": "jshint index.js lib/*.js test/*.js examples/*.js",
     "jscs": "jscs index.js lib/*.js test/*.js examples/*.js",
