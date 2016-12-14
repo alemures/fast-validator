@@ -26,25 +26,25 @@ var strings = ['alejandro', 'santiago', 'nieto'];
 // console.log(objectRules.validate(objects[0], objects[1], objects[2]));
 // console.log(stringRules.validate(strings[0], strings[1], strings[2]));
 
-// validate -> 36 ms with 100,000 times, 240 ms with 1,000,000
-// validateList -> 30 ms with 100,000 times, 190 with 1,000,000
+// validate -> 36 ms with 100,000 times, 260 ms with 1,000,000
+// validateList -> 30 ms with 100,000 times, 215 with 1,000,000
 var TIMES = 1e+6;
-var start = Date.now();
+console.time(TIMES + ' runs in');
 
 for (var i = 0; i < TIMES; i++) {
   run();
 }
 
-console.log('Final time:', Date.now() - start, 'ms');
+console.timeEnd(TIMES + ' runs in');
 
 function run() {
-  arrayRules.validate(arrays[0], arrays[1], arrays[2]); // 35 ms
-  booleanRules.validate(booleans[0], booleans[1], booleans[2]); // 15 ms
-  bufferRules.validate(buffers[0], buffers[1], buffers[2]); // 31 ms
-  dateRules.validate(dates[0], dates[1], dates[2]); // 42 ms
-  numberRules.validate(numbers[0], numbers[1], numbers[2]); // 22 ms
-  objectRules.validate(objects[0], objects[1], objects[2]); // 58 ms
-  stringRules.validate(strings[0], strings[1], strings[2]); // 34 ms
+  arrayRules.validate(arrays[0], arrays[1], arrays[2]); // 52 ms
+  booleanRules.validate(booleans[0], booleans[1], booleans[2]); // 14 ms
+  bufferRules.validate(buffers[0], buffers[1], buffers[2]); // 30 ms
+  dateRules.validate(dates[0], dates[1], dates[2]); // 40 ms
+  numberRules.validate(numbers[0], numbers[1], numbers[2]); // 21 ms
+  objectRules.validate(objects[0], objects[1], objects[2]); // 55 ms
+  stringRules.validate(strings[0], strings[1], strings[2]); // 33 ms
 
   // arrayRules.validateList(arrays);
   // booleanRules.validateList(booleans);
